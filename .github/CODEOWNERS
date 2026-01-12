@@ -1,0 +1,22 @@
+﻿# --- ARQUIVO DE GOVERNANÇA SEMA-MT ---
+
+# 1. REGRA DEFAULT (Segurança Máxima)
+# Qualquer arquivo não listado abaixo exige aprovação da SEMA.
+* @FelipeGabrielCode
+
+# 2. INFRAESTRUTURA CORE (Bloqueio Total)
+# Apenas a SEMA pode alterar configurações do sistema e do GitHub.
+/config/          @FelipeGabrielCode
+/.github/         @FelipeGabrielCode
+
+# 3. SILO VENDOR A (Módulo Florestal)
+# A Empresa A (Vendor A) tem autonomia aqui.
+/app/modulo-florestal/   @usuario-empresa-a @FelipeGabrielCode
+
+# 4. SILO VENDOR B (Módulo Financeiro)
+# A Empresa B (Vendor B) tem autonomia aqui.
+/app/modulo-financeiro/  @usuario-empresa-b @FelipeGabrielCode
+
+# 5. ZONA DE PERIGO (Bibliotecas Comuns)
+# Alterações aqui afetam todos. Exige consenso.
+/lib/commons/     @FelipeGabrielCode @usuario-empresa-a @usuario-empresa-b
