@@ -1,0 +1,26 @@
+﻿name: Governanca SEMA - Validacao Redmine
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-ticket:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar Titulo do PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            // Pega o titulo do Pull Request
+            const title = context.payload.pull_request.title;
+            
+            // Regex: Busca por padroes como 'refs #1234', 'fixes #1234', 'closes #1234'
+            // O 'i' no final torna a busca insensivel a maiusculas/minusculas
+            const regex = /(refs|fixes|closes) #\d+/i;
+            
+            if (!regex.test(title)) {
+              core.setFailed('⛔ ERRO DE COMPLIANCE: O titulo do PR deve conter o ticket do Redmine. Exemplo: "refs #1234 Ajuste no login"');
+            } else {
+              console.log('✅ Ticket Redmine identificado com sucesso.');
+            }
